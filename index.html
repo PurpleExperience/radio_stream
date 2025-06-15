@@ -1704,6 +1704,57 @@
             background: rgba(211, 47, 47, 0.2) !important;
             border: 1px solid #d32f2f !important;
         }
+
+
+
+
+	.play-btn {
+	    background: transparent;
+	    color: #4CAF50;
+	    border: 2px solid #4CAF50;
+	    padding: 10px 24px;
+	    border-radius: 50px;
+	    cursor: pointer;
+	    font-size: 1rem;
+	    font-weight: 600;
+	    transition: all 0.3s ease;
+	    margin-top: 10px;
+	    display: inline-flex;
+	    align-items: center;
+	    justify-content: center;
+	    gap: 8px;
+	    position: relative;
+	    overflow: hidden;
+	    margin-left: 10px;
+	}
+	
+	.play-btn::before {
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: -100%;
+	    width: 100%;
+	    height: 100%;
+	    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+	    transition: all 0.5s ease;
+	}
+	
+	.play-btn:hover {
+	    background: rgba(76, 175, 80, 0.1);
+	    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+	}
+	
+	.play-btn:hover::before {
+	    left: 100%;
+	}
+	
+	.play-btn:active {
+	    transform: scale(0.95);
+	}
+	
+	.play-btn i {
+	    font-style: normal;
+	}
     </style>
 </head>
 <body>
@@ -1950,8 +2001,9 @@
                 <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
                 <span id="volumeValue">50%</span>
             </div>
-            <button class="stop-btn" onclick="stopRadio()"><i>⏹</i></button>
-			<button class="support-btn" onclick="showSupportModal()"><i>❤️</i></button>
+            <!-- <button class="stop-btn" onclick="stopRadio()"><i>⏹</i></button> -->
+	    <button class="play-btn" id="pauseBtn" onclick="togglePause()"><i>⏸</i></button>
+	    <button class="support-btn" onclick="showSupportModal()"><i>❤️</i></button>
         </div>
     </div>
 	
@@ -2045,24 +2097,36 @@
             }
         }
 
-        function playRadio(element, url, id, name) {
-            // Показать индикатор загрузки
-            element.classList.add('loading');
-            
-            // Останавливаем текущее воспроизведение
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio = null;
-            }
-
-            // Убираем класс playing со всех станций
-            document.querySelectorAll('.radio-station').forEach(station => {
-                station.classList.remove('playing', 'error');
-            });
-
-            // Создаем новый audio элемент
-            currentAudio = new Audio(url);
-            currentStation = element;
+	function playRadio(element, url, id, name) {
+	    // Показать индикатор загрузки
+	    element.classList.add('loading');
+	    
+	    // Останавливаем текущее воспроизведение
+	    if (currentAudio) {
+	        currentAudio.pause();
+	        currentAudio = null;
+	    }
+	
+	    // Убираем класс playing со всех станций
+	    document.querySelectorAll('.radio-station').forEach(station => {
+	        station.classList.remove('playing', 'error');
+	    });
+	
+	    // Создаем новый audio элемент
+	    currentAudio = new Audio(url);
+	    currentStation = element;
+	    
+	    // Сохраняем информацию о последней станции
+	    lastStation = {
+	        element: element,
+	        url: url,
+	        id: id,
+	        name: name
+	    };
+	    
+	    // Сбрасываем состояние паузы
+	    isPaused = false;
+	    document.getElementById('pauseBtn').innerHTML = '<i>⏸</i>';
             
             // Устанавливаем громкость
             const volume = document.getElementById('volumeSlider').value;
@@ -2114,24 +2178,29 @@
             });
         }
 
-        function stopRadio() {
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio = null;
-            }
-            
-            document.querySelectorAll('.radio-station').forEach(station => {
-                station.classList.remove('playing', 'loading', 'error');
-            });
-            
-            // Деактивируем эквалайзер и анимации
-            const equalizer = document.getElementById('equalizer');
-            equalizer.classList.add('paused');
-            toggleAnimatedBackground(false);
-            toggleParticles(false);
-            
-            currentStation = null;
-        }
+	function stopRadio() {
+	    if (currentAudio) {
+	        currentAudio.pause();
+	        currentAudio = null;
+	    }
+	    
+	    document.querySelectorAll('.radio-station').forEach(station => {
+	        station.classList.remove('playing', 'loading', 'error');
+	    });
+	    
+	    // Деактивируем эквалайзер и анимации
+	    const equalizer = document.getElementById('equalizer');
+	    equalizer.classList.add('paused');
+	    toggleAnimatedBackground(false);
+	    toggleParticles(false);
+	    
+	    // Сбрасываем состояние паузы
+	    isPaused = false;
+	    document.getElementById('pauseBtn').innerHTML = '<i>⏸</i>';
+	    
+	    currentStation = null;
+	    lastStation = null;
+	}
 
         // Управление громкостью
         document.getElementById('volumeSlider').addEventListener('input', function() {
@@ -2300,6 +2369,51 @@
 			}
 		});
 		<!--Поддержка Автора-->
+
+
+		<!--Пауза-->
+		let isPaused = false;
+		let lastStation = null;
+		
+		function togglePause() {
+		    if (!currentAudio) {
+		        if (lastStation) {
+		            // Если аудио не играет, но есть последняя станция - возобновляем её
+		            playRadio(lastStation.element, lastStation.url, lastStation.id, lastStation.name);
+		        }
+		        return;
+		    }
+		
+		    const pauseBtn = document.getElementById('pauseBtn');
+		    
+		    if (isPaused) {
+		        // Возобновляем воспроизведение
+		        currentAudio.play();
+		        pauseBtn.innerHTML = '<i>⏸</i>';
+		        currentStation.classList.add('playing');
+		        
+		        // Активируем эквалайзер и анимации
+		        const equalizer = document.getElementById('equalizer');
+		        equalizer.classList.remove('paused');
+		        toggleAnimatedBackground(true);
+		        toggleParticles(true);
+		    } else {
+		        // Ставим на паузу
+		        currentAudio.pause();
+		        pauseBtn.innerHTML = '<i>▶️</i>';
+		        currentStation.classList.remove('playing');
+		        
+		        // Деактивируем эквалайзер и анимации
+		        const equalizer = document.getElementById('equalizer');
+		        equalizer.classList.add('paused');
+		        toggleAnimatedBackground(false);
+		        toggleParticles(false);
+		    }
+		    
+		    isPaused = !isPaused;
+		}
+	    	<!--Пауза-->
+
     </script>
 </body>
 </html>
