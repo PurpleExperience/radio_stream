@@ -2098,19 +2098,21 @@
         }
 
 	function playRadio(element, url, id, name) {
+	    // Если кликаем на уже играющую станцию - ставим на паузу/возобновляем
+	    if (currentStation === element && currentAudio) {
+	        togglePause();
+	        return;
+	    }
+	
 	    // Показать индикатор загрузки
 	    element.classList.add('loading');
 	    
 	    // Останавливаем текущее воспроизведение
 	    if (currentAudio) {
 	        currentAudio.pause();
-	        currentAudio = null;
+	        // Убираем класс playing с предыдущей станции
+	        currentStation.classList.remove('playing', 'error');
 	    }
-	
-	    // Убираем класс playing со всех станций
-	    document.querySelectorAll('.radio-station').forEach(station => {
-	        station.classList.remove('playing', 'error');
-	    });
 	
 	    // Создаем новый audio элемент
 	    currentAudio = new Audio(url);
@@ -2127,56 +2129,56 @@
 	    // Сбрасываем состояние паузы
 	    isPaused = false;
 	    document.getElementById('pauseBtn').innerHTML = '<i>⏸</i>';
-            
-            // Устанавливаем громкость
-            const volume = document.getElementById('volumeSlider').value;
-            currentAudio.volume = volume / 100;
-
-            // Обработчики событий
-            currentAudio.addEventListener('canplay', function() {
-                element.classList.remove('loading');
-                element.classList.add('playing');
-                
-                // Активируем эквалайзер
-                const equalizer = document.getElementById('equalizer');
-                equalizer.classList.remove('paused');
-                
-                // Активируем анимированный фон
-                toggleAnimatedBackground(true);
-                toggleParticles(true);
-            });
-
-            currentAudio.addEventListener('error', function(e) {
-                element.classList.remove('loading');
-                element.classList.add('error');
-                
-                // Деактивируем эквалайзер и анимации
-                const equalizer = document.getElementById('equalizer');
-                equalizer.classList.add('paused');
-                toggleAnimatedBackground(false);
-                toggleParticles(false);
-                
-                console.error('Ошибка воспроизведения:', e);
-            });
-
-            currentAudio.addEventListener('loadstart', function() {
-                // Ничего не показываем при загрузке
-            });
-
-            // Начинаем воспроизведение
-            currentAudio.play().catch(error => {
-                element.classList.remove('loading');
-                element.classList.add('error');
-                
-                // Деактивируем эквалайзер и анимации
-                const equalizer = document.getElementById('equalizer');
-                equalizer.classList.add('paused');
-                toggleAnimatedBackground(false);
-                toggleParticles(false);
-                
-                console.error('Ошибка воспроизведения:', error);
-            });
-        }
+	        
+	    // Устанавливаем громкость
+	    const volume = document.getElementById('volumeSlider').value;
+	    currentAudio.volume = volume / 100;
+	
+	    // Обработчики событий
+	    currentAudio.addEventListener('canplay', function() {
+	        element.classList.remove('loading');
+	        element.classList.add('playing');
+	        
+	        // Активируем эквалайзер
+	        const equalizer = document.getElementById('equalizer');
+	        equalizer.classList.remove('paused');
+	        
+	        // Активируем анимированный фон
+	        toggleAnimatedBackground(true);
+	        toggleParticles(true);
+	    });
+	
+	    currentAudio.addEventListener('error', function(e) {
+	        element.classList.remove('loading');
+	        element.classList.add('error');
+	        
+	        // Деактивируем эквалайзер и анимации
+	        const equalizer = document.getElementById('equalizer');
+	        equalizer.classList.add('paused');
+	        toggleAnimatedBackground(false);
+	        toggleParticles(false);
+	        
+	        console.error('Ошибка воспроизведения:', e);
+	    });
+	
+	    currentAudio.addEventListener('loadstart', function() {
+	        // Ничего не показываем при загрузке
+	    });
+	
+	    // Начинаем воспроизведение
+	    currentAudio.play().catch(error => {
+	        element.classList.remove('loading');
+	        element.classList.add('error');
+	        
+	        // Деактивируем эквалайзер и анимации
+	        const equalizer = document.getElementById('equalizer');
+	        equalizer.classList.add('paused');
+	        toggleAnimatedBackground(false);
+	        toggleParticles(false);
+	        
+	        console.error('Ошибка воспроизведения:', error);
+	    });
+	}
 
 	function stopRadio() {
 	    if (currentAudio) {
