@@ -1541,8 +1541,8 @@
 
 
 .player-controls {
-    background: rgba(30, 30, 30, 0.15);
-    backdrop-filter: blur(3px);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(1.3px);
     border-radius: 15px;
     padding: 15px 20px;
     text-align: center;
