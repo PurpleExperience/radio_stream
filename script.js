@@ -549,12 +549,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Обработчик поиска по Enter
-    document.getElementById('stationSearch').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchStation();
-        }
-    });
+	// Обработчик поиска по Enter
+	document.getElementById('stationSearch').addEventListener('keydown', function(e) {
+		if (e.key === 'Enter') {
+			// Если есть результаты - выбираем первый
+			const firstResult = document.querySelector('.search-result-item');
+			if (firstResult) {
+				firstResult.click(); // Автоматически выбираем первый результат
+			} else {
+				searchStation(); // Иначе выполняем обычный поиск
+			}
+			e.preventDefault(); // Предотвращаем возможное нежелательное поведение формы
+		}
+	});
     
     // Обработчики модального окна поддержки
     document.getElementById('closeModal').addEventListener('click', closeSupportModal);
