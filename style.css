@@ -1727,7 +1727,7 @@
 
 
     .search-results {
-        position: fixed;
+        position: absolute;
         top: auto;
         bottom: calc(100% - 10px);
         left: 10px;
