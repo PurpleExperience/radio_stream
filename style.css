@@ -1723,13 +1723,33 @@
         padding: 0 15px;
         box-sizing: border-box;
     }
-    
+
+
+
     .search-results {
+        position: fixed;
+        top: auto;
+        bottom: calc(100% - 10px);
+        left: 10px;
+        right: 10px;
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    }
+    
+    .search-result-item {
+        padding: 15px 20px;
+        font-size: 16px;
+        touch-action: manipulation; /* Улучшает отклик на тап */
+    }
+
+    
+/*     .search-results {
         position: fixed;
         left: 15px;
         right: 15px;
         max-height: 50vh;
-    }
+    } */
     /* Поиск остается на всю ширину */
     .search-row {
         width: 100%;
