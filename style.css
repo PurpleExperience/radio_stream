@@ -1,0 +1,1746 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #121212;
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+            touch-action: pan-y;
+        }
+
+        /* Анимированный фон */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(45deg, #121212, #1a1a1a, #121212);
+            background-size: 400% 400%;
+            transition: all 0.5s ease;
+        }
+
+        .animated-background.playing {
+            animation: gradientShift 8s ease-in-out infinite;
+            background: linear-gradient(45deg, 
+                #0a0a23, #1a1a2e, #16213e, #0f3460, 
+                #16213e, #1a1a2e, #0a0a23);
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 0%; }
+            75% { background-position: 50% 100%; }
+        }
+
+        /* Пульсирующий оверлей */
+        .pulse-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(76, 175, 80, 0.1) 0%, 
+                rgba(76, 175, 80, 0.05) 30%, 
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .pulse-overlay.playing {
+            opacity: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.1; }
+        }
+
+
+
+
+
+		.support-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+			z-index: 1000;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.modal-content {
+			background: #121212;
+			padding: 30px;
+			border-radius: 15px;
+			max-width: 400px;
+			width: 90%;
+			border: 1px solid #333;
+		}
+
+		.modal-content h3 {
+			margin-bottom: 20px;
+			color: #4CAF50;
+		}
+
+		.payment-method {
+			display: flex;
+			align-items: center;
+			padding: 15px;
+			margin: 10px 0;
+			background: rgba(30, 30, 30, 0.8);
+			border-radius: 10px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			border: 1px solid #333;
+		}
+
+		.payment-method:hover {
+			background: rgba(42, 42, 42, 0.9);
+			border-color: #4CAF50;
+		}
+
+		.payment-method img {
+			width: 40px;
+			margin-right: 15px;
+		}
+
+		.close-modal {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			font-size: 1.5rem;
+			cursor: pointer;
+			color: #b3b3b3;
+		}
+
+
+		.payment-methods {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.payment-details {
+			display: none;
+		}
+
+		.copy-button {
+			background: #4CAF50;
+			color: white;
+			border: none;
+			padding: 5px 10px;
+			border-radius: 5px;
+			margin-left: 10px;
+			cursor: pointer;
+			font-size: 0.8rem;
+			transition: all 0.3s ease;
+		}
+
+		.copy-button:hover {
+			background: #3e8e41;
+		}
+
+		.back-button {
+			background: #333;
+			color: white;
+			border: none;
+			padding: 8px 15px;
+			border-radius: 5px;
+			margin-top: 15px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.back-button:hover {
+			background: #555;
+		}
+
+		.payment-icon {
+			font-size: 1.8rem;
+			margin-right: 15px;
+			width: 40px;
+			text-align: center;
+			display: inline-block;
+		}
+
+
+		.player-controls .support-btn {
+			margin-top: 1px;
+			background: linear-gradient(90deg, #ff4d4d, #ff7676);
+			padding: 3px 3px;
+			font-size: 0.9rem;
+			border-radius: 50px;
+			/* Убрали фиксированное позиционирование */
+			position: static;
+			top: auto;
+			right: auto;
+			/* Добавили новые стили */
+			display: inline-block;
+			margin-left: 10px;
+		}
+
+		.player-controls .support-btn:hover {
+			background: linear-gradient(90deg, #ff7676, #ff4d4d);
+		}
+		.player-controls .support-btn i {
+			font-size: 1.1em;
+		}
+
+		
+		
+		
+		
+/* Стили для иконки Phonk */
+.radio-station[onclick*="phonk"] .station-icon {
+	color: #ff00ff; /* Фиолетовый цвет для Phonk */
+	filter: drop-shadow(0 0 5px rgba(255, 0, 255, 0.5));
+}
+
+.radio-station[onclick*="phonk"]:hover .station-icon {
+	transform: scale(1.1) rotate(5deg);
+	filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.8));
+}
+
+.radio-station[onclick*="phonk"].playing .station-icon {
+	animation: phonkPulse 1s ease infinite alternate;
+}
+
+@keyframes phonkPulse {
+	0% { 
+		transform: scale(1);
+		filter: drop-shadow(0 0 5px rgba(255, 0, 255, 0.5));
+	}
+	100% { 
+		transform: scale(1.15);
+		filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.9));
+	}
+}
+
+
+.radio-station[onclick*="phonk"] .station-icon {
+	background: linear-gradient(45deg, #ff00ff, #00ffff);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+		
+		
+/* Стили для иконки Rock */
+.rock-icon {
+    color: #ff4500; /* Оранжево-красный цвет */
+    filter: 
+        drop-shadow(0 0 2px #ff0000)
+        drop-shadow(0 0 5px rgba(255, 69, 0, 0.7));
+    transform: rotate(-5deg);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.radio-station:hover .rock-icon {
+    transform: rotate(0deg) scale(1.1);
+    filter: 
+        drop-shadow(0 0 3px #ff0000)
+        drop-shadow(0 0 8px rgba(255, 69, 0, 0.9));
+}
+
+.radio-station.playing .rock-icon {
+    animation: rockShake 0.5s ease infinite alternate;
+    color: #ff0000;
+}
+
+@keyframes rockShake {
+    0% { transform: rotate(-5deg) scale(1); }
+    25% { transform: rotate(-8deg) scale(1.05); }
+    50% { transform: rotate(-2deg) scale(1.1); }
+    75% { transform: rotate(-7deg) scale(1.05); }
+    100% { transform: rotate(-5deg) scale(1); }
+}
+		
+
+
+
+
+
+
+/* Стили для дорожного радио */
+.dorognoe-station {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid #555;
+    transition: all 0.3s ease;
+}
+
+.dorognoe-station .station-icon {
+    color: #4CAF50; /* Зеленый цвет для дорожных ассоциаций */
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.5));
+    transition: all 0.3s ease;
+}
+
+.dorognoe-station:hover {
+    background: rgba(60, 60, 60, 0.9);
+    border-color: #4CAF50;
+}
+
+.dorognoe-station:hover .station-icon {
+    color: #8BC34A;
+    filter: drop-shadow(0 0 8px rgba(139, 195, 74, 0.7));
+    transform: scale(1.1);
+}
+
+.dorognoe-station.playing {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #8BC34A;
+    animation: roadPulse 2s infinite;
+}
+
+.dorognoe-station.playing .station-icon {
+    color: #FFC107; /* Желтый цвет при воспроизведении */
+    animation: carDrive 3s linear infinite;
+}
+
+@keyframes carDrive {
+    0% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    100% { transform: translateX(-3px); }
+}
+
+@keyframes roadPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(139, 195, 74, 0); }
+    50% { box-shadow: 0 0 15px rgba(139, 195, 74, 0.3); }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Стили для Europa Plus */
+.europa-plus-station {
+    background: rgba(41, 91, 167, 0.1); /* Синий фон с прозрачностью */
+    border: 1px solid rgba(41, 91, 167, 0.3); /* Граница в цвет логотипа */
+    transition: all 0.3s ease;
+}
+
+.europa-plus-station .station-icon {
+    color: #295ba7; /* Основной синий цвет логотипа */
+    filter: drop-shadow(0 0 5px rgba(41, 91, 167, 0.3));
+    transition: all 0.3s ease;
+}
+
+.europa-plus-station:hover {
+    background: rgba(41, 91, 167, 0.2);
+    border-color: rgba(41, 91, 167, 0.6);
+}
+
+.europa-plus-station:hover .station-icon {
+    color: #bf5332; /* Красный акцент при наведении */
+    transform: scale(1.1);
+}
+
+.europa-plus-station.playing {
+    background: rgba(41, 91, 167, 0.15);
+    border-color: rgba(191, 83, 50, 0.6); /* Красный акцент при воспроизведении */
+    animation: europaPulse 2s infinite;
+}
+
+.europa-plus-station.playing .station-icon {
+    animation: europaSpin 4s linear infinite;
+}
+
+@keyframes europaPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(41, 91, 167, 0); }
+    50% { box-shadow: 0 0 15px rgba(41, 91, 167, 0.2); }
+}
+
+@keyframes europaSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(5deg) scale(1.05); }
+    50% { transform: rotate(0deg) scale(1.1); }
+    75% { transform: rotate(-5deg) scale(1.05); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+
+
+.europa-plus-station:hover::before {
+    opacity: 0.5;
+    animation: starTwinkle 1.5s ease infinite;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+
+
+
+/* Стили для Gaming Radio */
+.gaming-station {
+    background: rgba(20, 20, 30, 0.8);
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.gaming-station .station-icon {
+    color: #0ff; /* Неоновый голубой */
+    filter: 
+        drop-shadow(0 0 5px rgba(0, 255, 255, 0.7))
+        drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+    transition: all 0.3s ease;
+}
+
+.gaming-station:hover {
+    background: rgba(30, 30, 50, 0.9);
+    border-color: #0ff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.gaming-station:hover .station-icon {
+    color: #f0f; /* Неоновый розовый при наведении */
+    transform: scale(1.1);
+}
+
+.gaming-station.playing {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: #f0f;
+    animation: gamingPulse 1.5s infinite alternate;
+}
+
+.gaming-station.playing .station-icon {
+    animation: gamingGlow 2s ease infinite alternate;
+}
+
+@keyframes gamingPulse {
+    0% { box-shadow: 0 0 5px rgba(0, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); }
+}
+
+@keyframes gamingGlow {
+    0%, 100% { 
+        color: #0ff;
+        filter: 
+            drop-shadow(0 0 5px rgba(0, 255, 255, 0.7))
+            drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+    }
+    50% { 
+        color: #f0f;
+        filter: 
+            drop-shadow(0 0 8px rgba(255, 0, 255, 0.9))
+            drop-shadow(0 0 15px rgba(255, 0, 255, 0.5));
+    }
+}
+
+/* Эффект пикселей/глитча */
+.gaming-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(
+            rgba(0, 255, 255, 0.05) 1px, 
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 0, 255, 0.05) 1px, 
+            transparent 1px
+        );
+    background-size: 5px 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gaming-station:hover::before {
+    opacity: 0.5;
+}
+
+/* Эффект "загрузки" при воспроизведении */
+.gaming-station.playing::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #0ff, #f0f);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: gamingLoad 3s linear infinite;
+}
+
+@keyframes gamingLoad {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Стили для Dubstep Radio */
+.dubstep-station {
+    background: rgba(10, 10, 20, 0.8);
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dubstep-station .station-icon {
+    color: #9c27b0; /* Фиолетовый - характерный для дабстепа */
+    filter: 
+        drop-shadow(0 0 5px rgba(156, 39, 176, 0.7))
+        drop-shadow(0 0 10px rgba(156, 39, 176, 0.3));
+    transition: all 0.3s ease;
+}
+
+.dubstep-station:hover {
+    background: rgba(30, 20, 40, 0.9);
+    border-color: #9c27b0;
+    box-shadow: 0 0 15px rgba(156, 39, 176, 0.5);
+}
+
+.dubstep-station:hover .station-icon {
+    color: #00bcd4; /* Голубой акцент при наведении */
+    transform: scale(1.1);
+}
+
+.dubstep-station.playing {
+    background: rgba(156, 39, 176, 0.15);
+    border-color: #00bcd4;
+    animation: dubstepPulse 0.5s infinite alternate;
+}
+
+.dubstep-station.playing .station-icon {
+    animation: dubstepColorShift 2s linear infinite;
+}
+
+@keyframes dubstepPulse {
+    0% { 
+        box-shadow: 0 0 5px rgba(156, 39, 176, 0.5);
+        transform: scale(1);
+    }
+    100% { 
+        box-shadow: 0 0 20px rgba(0, 188, 212, 0.7);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes dubstepColorShift {
+    0%, 100% { 
+        color: #9c27b0;
+        filter: 
+            drop-shadow(0 0 5px rgba(156, 39, 176, 0.7))
+            drop-shadow(0 0 10px rgba(156, 39, 176, 0.3));
+    }
+    50% { 
+        color: #00bcd4;
+        filter: 
+            drop-shadow(0 0 8px rgba(0, 188, 212, 0.9))
+            drop-shadow(0 0 15px rgba(0, 188, 212, 0.5));
+    }
+}
+
+/* Эффект "басового удара" */
+.dubstep-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(
+            45deg,
+            transparent 48%,
+            rgba(156, 39, 176, 0.1) 50%,
+            transparent 52%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 48%,
+            rgba(0, 188, 212, 0.1) 50%,
+            transparent 52%
+        );
+    background-size: 10px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.dubstep-station:hover::before {
+    opacity: 0.5;
+    animation: dubstepBass 0.8s linear infinite;
+}
+
+@keyframes dubstepBass {
+    0% { background-position: 0 0; }
+    100% { background-position: 10px 10px; }
+}
+
+/* Эффект "глитча" при воспроизведении */
+.dubstep-station.playing::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(
+            rgba(0, 188, 212, 0.05) 50%,
+            transparent 50%
+        );
+    background-size: 100% 4px;
+    opacity: 0;
+    animation: dubstepGlitch 0.1s linear infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes dubstepGlitch {
+    0% { 
+        opacity: 0;
+        transform: translateY(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        opacity: 0.1;
+        transform: translateY(-2px);
+    }
+    20%, 40%, 60%, 80%, 100% {
+        opacity: 0.1;
+        transform: translateY(2px);
+    }
+}
+
+
+
+
+
+
+
+/* Стили для Lo-Fi Radio */
+.lofi-station {
+    background: rgba(245, 241, 235, 0.15); /* Кремовый фон с прозрачностью */
+    border: 1px solid rgba(169, 145, 125, 0.3); /* Теплая коричневая граница */
+    transition: all 0.5s ease;
+    backdrop-filter: blur(2px);
+    position: relative;
+    overflow: hidden;
+}
+
+.lofi-station .station-icon {
+    color: #8B6B4D; /* Теплый коричневый цвет */
+    filter: drop-shadow(0 2px 4px rgba(139, 107, 77, 0.2));
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.9;
+}
+
+.lofi-station:hover {
+    background: rgba(245, 241, 235, 0.25);
+    border-color: rgba(139, 107, 77, 0.5);
+}
+
+.lofi-station:hover .station-icon {
+    color: #6D4C41; /* Более темный коричневый */
+    transform: scale(1.05) rotate(2deg);
+    opacity: 1;
+}
+
+.lofi-station.playing {
+    background: rgba(245, 241, 235, 0.2);
+    border-color: rgba(139, 107, 77, 0.6);
+    animation: lofiPulse 4s ease infinite;
+}
+
+.lofi-station.playing .station-icon {
+    animation: lofiFloat 6s ease-in-out infinite;
+}
+
+@keyframes lofiPulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 rgba(139, 107, 77, 0);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 10px rgba(139, 107, 77, 0.1);
+        transform: scale(1.005);
+    }
+}
+
+@keyframes lofiFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+    }
+    50% { 
+        transform: translateY(-5px) rotate(1deg);
+    }
+}
+
+/* Эффект "виниловой пластинки" */
+.lofi-station::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(
+        circle,
+        transparent 40%,
+        rgba(139, 107, 77, 0.05) 45%,
+        transparent 50%
+    );
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.lofi-station:hover::before {
+    opacity: 0.6;
+    animation: lofiSpin 10s linear infinite;
+}
+
+@keyframes lofiSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+
+
+
+
+
+
+
+/* Стили для Шансон радио */
+.shanson-station {
+    background: rgba(245, 241, 235, 0.9);
+    border: 1px solid rgba(169, 145, 125, 0.5);
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.shanson-station .station-icon {
+    color: #8B6B4D;
+    filter: drop-shadow(0 2px 4px rgba(139, 107, 77, 0.3));
+    transition: all 0.5s ease;
+    opacity: 0.9;
+}
+
+
+
+.shanson-station:hover {
+    background: rgba(245, 241, 235, 0.95);
+    border-color: rgba(139, 107, 77, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.shanson-station:hover .station-icon {
+    color: #6D4C41;
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.shanson-station.playing {
+    background: rgba(245, 241, 235, 0.95);
+    border-color: rgba(139, 107, 77, 0.8);
+    box-shadow: 0 0 15px rgba(139, 107, 77, 0.3);
+}
+
+.shanson-station.playing .station-icon {
+    animation: shansonPulse 2s ease infinite;
+}
+
+@keyframes shansonPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Эффект "винила" */
+.shanson-station::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(
+        circle,
+        transparent 40%,
+        rgba(139, 107, 77, 0.1) 45%,
+        transparent 50%
+    );
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.shanson-station:hover::before {
+    opacity: 0.6;
+    animation: shansonSpin 8s linear infinite;
+}
+
+@keyframes shansonSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+/* Адаптация для темной темы */
+@media (prefers-color-scheme: dark) {
+    .shanson-station {
+        background: rgba(40, 35, 30, 0.9);
+        border-color: rgba(110, 85, 65, 0.6);
+    }
+    .shanson-station .station-name {
+        color: white;
+    }
+    .shanson-station .station-genre {
+        color: #b59a7d;
+    }
+}
+
+
+
+
+
+
+/* Стили для 70s Hits Radio */
+.seventies-station {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    border: 2px solid #ff4757;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.seventies-station .station-icon {
+    color: #fff;
+    filter: 
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.7))
+        drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))
+        drop-shadow(0 0 15px rgba(255, 107, 107, 0.3));
+    transition: all 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+
+
+.seventies-station:hover {
+    background: linear-gradient(135deg, #ff5252, #ff7f50);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 6px 20px rgba(255, 107, 107, 0.4),
+        0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.seventies-station:hover .station-icon {
+    transform: rotate(5deg) scale(1.1);
+    filter: 
+        drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
+        drop-shadow(0 0 15px rgba(255, 215, 0, 0.7))
+        drop-shadow(0 0 25px rgba(255, 107, 107, 0.5));
+    animation: discoShine 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes discoShine {
+    from { opacity: 0.9; }
+    to { opacity: 1; }
+}
+
+.seventies-station.playing {
+    animation: seventiesPulse 2s infinite alternate;
+    border-color: #ffeb3b;
+}
+
+@keyframes seventiesPulse {
+    0% { 
+        box-shadow: 
+            0 0 10px rgba(255, 107, 107, 0.4),
+            0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    100% { 
+        box-shadow: 
+            0 0 20px rgba(255, 107, 107, 0.7),
+            0 0 40px rgba(255, 215, 0, 0.4);
+    }
+}
+
+/* Эффект диско-шара */
+.seventies-station::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.15) 0%,
+        rgba(255,215,0,0.1) 30%,
+        transparent 70%
+    );
+    transform: rotate(0deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.seventies-station:hover::before {
+    opacity: 0.8;
+    animation: discoLight 8s linear infinite;
+}
+
+/* Эффект световых бликов */
+.seventies-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.05) 0%,
+            rgba(255,255,255,0) 50%,
+            rgba(255,255,255,0.05) 100%
+        );
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Адаптация для темной темы */
+@media (prefers-color-scheme: dark) {
+    .seventies-station {
+        background: linear-gradient(135deg, #e84343, #e67e22);
+        border-color: #ff4757;
+    }
+    .seventies-station .station-icon {
+        filter: 
+            drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+    }
+}
+
+
+
+
+
+
+
+
+
+/* Стили для Супердискотеки 90-х */
+.superdisco-station {
+    background: linear-gradient(135deg, #6e45e2, #88d3ce);
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(110, 69, 226, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.superdisco-station .station-icon {
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+
+.superdisco-station:hover {
+    background: linear-gradient(135deg, #7d55e8, #99e8e3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(110, 69, 226, 0.6);
+}
+
+.superdisco-station:hover .station-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.superdisco-station.playing {
+    animation: discoGlow 2s infinite alternate;
+    border-color: #ffeb3b;
+}
+
+@keyframes discoGlow {
+    0% { box-shadow: 0 0 15px rgba(110, 69, 226, 0.5); }
+    100% { box-shadow: 0 0 30px rgba(110, 69, 226, 0.8); }
+}
+
+/* Эффект диско-шара */
+.superdisco-station::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.15) 0%,
+        transparent 70%
+    );
+    transform: rotate(0deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.superdisco-station:hover::before {
+    opacity: 0.8;
+    animation: discoSpin 10s linear infinite;
+}
+
+@keyframes discoSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+
+/* Адаптация для темной темы */
+@media (prefers-color-scheme: dark) {
+    .superdisco-station {
+        background: linear-gradient(135deg, #5a36c7, #6fc9c4);
+    }
+    .superdisco-station .station-genre {
+        color: #ffc107;
+    }
+}
+
+
+.superdisco-station .station-icon {
+    color: #fff;
+    filter: 
+        drop-shadow(0 0 8px rgba(255, 255, 255, 0.7))
+        drop-shadow(0 0 15px rgba(110, 69, 226, 0.6))
+        drop-shadow(0 0 25px rgba(110, 69, 226, 0.3));
+    transition: all 0.5s ease;
+}
+
+.superdisco-station:hover .station-icon {
+    filter: 
+        drop-shadow(0 0 12px rgba(255, 255, 255, 0.9))
+        drop-shadow(0 0 25px rgba(110, 69, 226, 0.8))
+        drop-shadow(0 0 40px rgba(110, 69, 226, 0.5));
+}
+
+
+
+
+
+
+/* Стили для Reggae Radio */
+.reggae-station {
+    background: linear-gradient(135deg, #006b3f, #f8c537);
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 107, 63, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.reggae-station .station-icon {
+    color: #000000;
+    filter: 
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
+        drop-shadow(0 0 5px rgba(248, 197, 55, 0.5));
+    transition: all 0.5s ease;
+}
+
+
+
+.reggae-station:hover {
+    background: linear-gradient(135deg, #008751, #ffd700);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 107, 63, 0.5);
+}
+
+.reggae-station:hover .station-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: 
+        drop-shadow(0 0 8px rgba(248, 197, 55, 0.8))
+        drop-shadow(0 0 15px rgba(0, 107, 63, 0.3));
+    animation: reggaeBob 1.5s ease-in-out infinite;
+}
+
+@keyframes reggaeBob {
+    0%, 100% { transform: scale(1.1) rotate(5deg) translateY(0); }
+    50% { transform: scale(1.1) rotate(5deg) translateY(-5px); }
+}
+
+.reggae-station.playing {
+    animation: reggaePulse 2s infinite alternate;
+    border-color: #f8c537;
+}
+
+@keyframes reggaePulse {
+    0% { 
+        box-shadow: 
+            0 0 10px rgba(0, 107, 63, 0.4),
+            0 0 5px rgba(248, 197, 55, 0.3);
+    }
+    100% { 
+        box-shadow: 
+            0 0 20px rgba(0, 107, 63, 0.7),
+            0 0 15px rgba(248, 197, 55, 0.5);
+    }
+}
+
+/* Эффект солнечных лучей */
+.reggae-station::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(248, 197, 55, 0.1) 0%,
+        transparent 70%
+    );
+    transform: rotate(0deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.reggae-station:hover::before {
+    opacity: 0.6;
+    animation: reggaeSun 10s linear infinite;
+}
+
+@keyframes reggaeSun {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Эффект "раста-полос" */
+.reggae-station::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        #006b3f 0%,
+        #f8c537 20%,
+        #000000 40%,
+        #f8c537 60%,
+        #006b3f 80%,
+        #f8c537 100%
+    );
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Адаптация для темной темы */
+@media (prefers-color-scheme: dark) {
+    .reggae-station {
+        background: linear-gradient(135deg, #004d2c, #d4a732);
+    }
+    .reggae-station .station-name {
+        color: #ffffff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .reggae-station .station-genre {
+        color: #d4a732;
+    }
+}
+
+
+
+
+
+/* Electro Radio Station Styles */
+.electro-station {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    border: 1px solid #4f3bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(79, 59, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.electro-station .station-icon {
+    color: #00f0ff;
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.7));
+    transition: all 0.4s ease;
+}
+
+
+
+.electro-station:hover {
+    background: linear-gradient(135deg, #0f0c29, #3a3480, #2d2b52);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(79, 59, 255, 0.5);
+}
+
+.electro-station:hover .station-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.9));
+    animation: electroPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes electroPulse {
+    0%, 100% { transform: scale(1.1); }
+    50% { transform: scale(1.15); }
+}
+
+.electro-station.playing {
+    animation: electroGlow 2s infinite alternate;
+    border-color: #00f0ff;
+}
+
+@keyframes electroGlow {
+    0% { box-shadow: 0 0 10px rgba(79, 59, 255, 0.5), 0 0 5px rgba(0, 240, 255, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(79, 59, 255, 0.8), 0 0 15px rgba(0, 240, 255, 0.5); }
+}
+
+/* Circuit board effect */
+.electro-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, rgba(79, 59, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(79, 59, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Digital scanline effect */
+.electro-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 95%,
+        rgba(0, 240, 255, 0.1) 95%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    .electro-station {
+        background: linear-gradient(135deg, #07061a, #201d4d, #181730);
+    }
+    .electro-station .station-name {
+        color: #e0e0e0;
+    }
+    .electro-station .station-genre {
+        color: #00d0e0;
+    }
+}
+
+
+
+
+        /* Движущиеся частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(76, 175, 80, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .particle.active {
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) translateX(10px) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) translateX(-10px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) translateX(0) scale(0);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            color: #b3b3b3;
+        }
+
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .radio-station-container {
+            aspect-ratio: 1/1;
+            perspective: 1000px;
+        }
+
+        .radio-station {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .radio-station:hover {
+            background: rgba(42, 42, 42, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: #444;
+        }
+
+.radio-station.playing {
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.4) 0%, rgba(30, 30, 30, 0.8) 100%);
+    border: 1px solid #2e7d32;
+    /* Задержка анимации */
+    animation: stationPulse 2s ease-in-out 0.3s infinite;
+}
+
+        /* Эффект хвоста */
+        .radio-station.trail {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+
+        @keyframes stationPulse {
+            0%, 100% { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+            50% { box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3); }
+        }
+
+        .radio-station.playing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A, #4CAF50);
+            background-size: 200% 100%;
+            animation: progress 2s linear infinite;
+        }
+
+        @keyframes progress {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .station-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .station-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .station-genre {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: #b3b3b3;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .radio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .radio-station {
+                padding: 15px;
+            }
+            
+            .station-name {
+                font-size: 1.1rem;
+            }
+
+            .current-station {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .error {
+            background: rgba(211, 47, 47, 0.2) !important;
+            border: 1px solid #d32f2f !important;
+        }
+
+
+
+
+
+
+
+
+
+.player-controls {
+    background: rgba(30, 30, 30, 0.15);
+    backdrop-filter: blur(3px);
+    border-radius: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    border: 1px solid #333;
+    position: sticky;
+    bottom: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    width: 600px;
+    max-width: 80%;
+}
+
+.player-controls.playing {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(76, 175, 80, 0.3);
+    box-shadow: 0 -2px 20px rgba(76, 175, 80, 0.2);
+}
+
+.current-station {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 3px;
+    border-radius: 1.5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+}
+
+.play-btn {
+    background: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.play-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.play-btn:hover {
+    background: rgba(76, 175, 80, 0.1);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.play-btn:hover::before {
+    left: 100%;
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.play-btn i {
+    font-style: normal;
+}
+
+
+
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    width: 200px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 2px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.search-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.search-container:hover::before {
+    left: 100%;
+}
+
+#stationSearch {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    background: transparent;
+    color: white;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+#stationSearch::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .player-controls {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    /* Поиск остается на всю ширину */
+    .search-row {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* Элементы управления в одну линию */
+    .controls-row {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    /* Адаптация ползунка громкости */
+    .volume-control {
+        flex-grow: 1;
+        max-width: 120px;
+    }
+    
+    /* Уменьшаем кнопки */
+    .play-btn, .support-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
