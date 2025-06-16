@@ -362,7 +362,10 @@ function searchStation() {
         const lowerName = stationName.toLowerCase();
         
         if (lowerName.includes(searchTerm)) {
-            foundStations.push(stationName);
+            foundStations.push({
+                name: stationName,
+                element: station
+            });
             
             // Подсвечиваем найденную станцию
             station.style.boxShadow = '0 0 15px #4CAF50';
@@ -373,27 +376,33 @@ function searchStation() {
     if (foundStations.length > 0) {
         resultsContainer.style.display = 'block';
         
-        foundStations.forEach(stationName => {
+        foundStations.forEach(item => {
             const resultItem = document.createElement('div');
             resultItem.className = 'search-result-item';
-            resultItem.textContent = stationName;
+            resultItem.textContent = item.name;
             
-            // При клике на результат - прокручиваем к станции, очищаем поле и скрываем результаты
-            resultItem.addEventListener('click', () => {
-                const allStations = document.querySelectorAll('.radio-station-container');
-                allStations.forEach(station => {
-                    if (station.querySelector('.station-name').textContent === stationName) {
-                        station.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        station.style.boxShadow = '0 0 15px #FF5722';
-                        setTimeout(() => {
-                            station.style.boxShadow = '0 0 15px #4CAF50';
-                        }, 1000);
-                    }
-                });
+            // При клике на результат
+            resultItem.addEventListener('click', (e) => {
+                e.preventDefault();
                 
                 // Очищаем поле ввода и скрываем результаты
                 document.getElementById('stationSearch').value = '';
                 resultsContainer.style.display = 'none';
+                
+                // Закрываем клавиатуру на мобильных устройствах
+                document.getElementById('stationSearch').blur();
+                
+                // Небольшая задержка для мобильных устройств
+                setTimeout(() => {
+                    // Прокручиваем к элементу
+                    item.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Подсвечиваем элемент
+                    item.element.style.boxShadow = '0 0 15px #FF5722';
+                    setTimeout(() => {
+                        item.element.style.boxShadow = '0 0 15px #4CAF50';
+                    }, 1000);
+                }, 100); // Небольшая задержка для корректной работы на мобильных
             });
             
             resultsContainer.appendChild(resultItem);
