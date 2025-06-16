@@ -378,7 +378,7 @@ function searchStation() {
             resultItem.className = 'search-result-item';
             resultItem.textContent = stationName;
             
-            // При клике на результат - прокручиваем к станции
+            // При клике на результат - прокручиваем к станции, очищаем поле и скрываем результаты
             resultItem.addEventListener('click', () => {
                 const allStations = document.querySelectorAll('.radio-station-container');
                 allStations.forEach(station => {
@@ -390,6 +390,10 @@ function searchStation() {
                         }, 1000);
                     }
                 });
+                
+                // Очищаем поле ввода и скрываем результаты
+                document.getElementById('stationSearch').value = '';
+                resultsContainer.style.display = 'none';
             });
             
             resultsContainer.appendChild(resultItem);
