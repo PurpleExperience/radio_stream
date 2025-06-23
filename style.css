@@ -1347,42 +1347,6 @@
     100% { box-shadow: 0 0 20px rgba(230, 175, 46, 0.7); }
 }
 
-
-
-/* Vinyl record effect (сохранен) */
-.jazz-station::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle, transparent 60%, rgba(230, 175, 46, 0.1) 60.5%, transparent 61%),
-        repeating-radial-gradient(circle, transparent 0%, rgba(230, 175, 46, 0.05) 0.5%, transparent 1%);
-    background-size: 40px 40px;
-    opacity: 0.3; /* Слегка уменьшена прозрачность */
-    pointer-events: none;
-}
-
-/* Smooth jazz wave effect (упрощен) */
-.jazz-station::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent 95%,
-        rgba(230, 175, 46, 0.05) 95%
-    );
-    background-size: 100% 10px;
-    pointer-events: none;
-    animation: jazzWave 15s linear infinite;
-}
-
 /* Dark mode adaptation */
 @media (prefers-color-scheme: dark) {
     .jazz-station {
@@ -1428,15 +1392,6 @@
 @keyframes ermitageGlow {
     0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
     100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
-}
-
-/* Station name styling */
-.ermitage-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    font-style: italic;
-    color: #ffffff; /* Белый цвет текста */
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Dark mode adaptation */
@@ -1507,94 +1462,42 @@
     }
 }
 
-/* Classical KUSC Radio Station Styles */
+/* Classical KUSC Radio Station Styles - Modified */
 .classical_kusc-station {
     background: linear-gradient(135deg, #1e1e2e, #2a2a3a, #3a3a4a);
-    border: 1px solid #8b6b4b;
+    border: 1px solid transparent; /* Убрана коричневая обводка */
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(139, 107, 75, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
 .classical_kusc-station .station-icon {
-    width: 80px; /* Размер можно регулировать */
+    width: 80px;
     height: 80px;
     transition: all 0.4s ease;
-    filter: drop-shadow(0 0 8px rgba(210, 180, 140, 0.4));
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
 .classical_kusc-station:hover {
     background: linear-gradient(135deg, #282838, #363646, #464656);
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(139, 107, 75, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .classical_kusc-station:hover .station-icon {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 12px rgba(210, 180, 140, 0.6));
-    animation: classicalPulse 2s ease-in-out infinite;
-}
-
-@keyframes classicalPulse {
-    0%, 100% { transform: scale(1.1); }
-    50% { transform: scale(1.13); }
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .classical_kusc-station.playing {
     animation: classicalGlow 3s infinite alternate;
-    border-color: #d2b48c;
 }
 
 @keyframes classicalGlow {
-    0% { box-shadow: 0 0 10px rgba(139, 107, 75, 0.5), 0 0 5px rgba(210, 180, 140, 0.3); }
-    100% { box-shadow: 0 0 20px rgba(139, 107, 75, 0.8), 0 0 15px rgba(210, 180, 140, 0.5); }
-}
-
-/* Musical notes effect */
-.classical_kusc-station::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle, transparent 95%, rgba(210, 180, 140, 0.05) 96%, transparent 97%),
-        repeating-linear-gradient(45deg, transparent 0%, rgba(210, 180, 140, 0.03) 0.5%, transparent 1%);
-    background-size: 30px 30px;
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-/* Classical frame effect */
-.classical_kusc-station::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid rgba(210, 180, 140, 0.3);
-    border-radius: 6px;
-    pointer-events: none;
-}
-
-
-
-/* Frequency badge effect */
-.classical_kusc-station .station-name::after {
-    content: "KUSC";
-    display: inline-block;
-    margin-left: 6px;
-    font-size: 0.9em;
-    font-style: italic;
-    color: #fff;
-    background: rgba(139, 107, 75, 0.6);
-    padding: 2px 8px;
-    border-radius: 10px;
-    vertical-align: middle;
+    0% { box-shadow: 0 0 5px rgba(210, 180, 140, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(210, 180, 140, 0.7); }
 }
 
 /* Dark mode adaptation */
@@ -1603,19 +1506,12 @@
         background: linear-gradient(135deg, #141420, #1e1e2e, #282838);
     }
     .classical_kusc-station .station-name {
-        color: #e6d5b8;
+        color: #ffffff;
     }
     .classical_kusc-station::before {
-        opacity: 0.6;
+        opacity: 0.4;
     }
 }
-
-/* Hover effect for frequency */
-.classical_kusc-station:hover .station-name::after {
-    background: rgba(210, 180, 140, 0.7);
-    transition: all 0.3s ease;
-}
-
 
 
 
