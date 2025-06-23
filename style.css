@@ -1474,10 +1474,8 @@
 }
 
 .classical_kusc-station .station-icon {
-    width: 80px;
-    height: 80px;
-    transition: all 0.4s ease;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    transition: all 0.4s ease;
 }
 
 .classical_kusc-station:hover {
