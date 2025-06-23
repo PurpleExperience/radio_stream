@@ -1311,6 +1311,496 @@
 }
 
 
+/* Jazz Radio Station Styles */
+.jazz-station {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    border: 1px solid #8d6e63;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(141, 110, 99, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.jazz-station .station-icon {
+    color: #e6af2e;
+    filter: drop-shadow(0 0 8px rgba(230, 175, 46, 0.5));
+    transition: all 0.4s ease;
+}
+
+.jazz-station:hover {
+    background: linear-gradient(135deg, #1a1a2e, #1b2a4e, #133b6e);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(141, 110, 99, 0.5);
+}
+
+.jazz-station:hover .station-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(230, 175, 46, 0.7));
+    animation: jazzPulse 2s ease-in-out infinite;
+}
+
+@keyframes jazzPulse {
+    0%, 100% { transform: scale(1.1); opacity: 0.9; }
+    50% { transform: scale(1.13); opacity: 1; }
+}
+
+.jazz-station.playing {
+    animation: jazzGlow 3s infinite alternate;
+    border-color: #e6af2e;
+}
+
+@keyframes jazzGlow {
+    0% { box-shadow: 0 0 10px rgba(141, 110, 99, 0.5), 0 0 5px rgba(230, 175, 46, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(141, 110, 99, 0.8), 0 0 15px rgba(230, 175, 46, 0.5); }
+}
+
+/* Vinyl record effect */
+.jazz-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle, transparent 60%, rgba(230, 175, 46, 0.1) 60.5%, transparent 61%),
+        repeating-radial-gradient(circle, transparent 0%, rgba(230, 175, 46, 0.05) 0.5%, transparent 1%);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Smooth jazz wave effect */
+.jazz-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 90%,
+        rgba(230, 175, 46, 0.1) 90%
+    );
+    background-size: 100% 15px;
+    pointer-events: none;
+    animation: jazzWave 12s linear infinite;
+}
+
+@keyframes jazzWave {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    .jazz-station {
+        background: linear-gradient(135deg, #0d0d1a, #101a30, #0a2240);
+    }
+    .jazz-station .station-name {
+        color: #f5f5f5;
+    }
+    .jazz-station .station-genre {
+        color: #e6af2e;
+    }
+}
+
+/* Ermitage Radio Station Styles */
+.ermitage-station {
+    background: linear-gradient(135deg, #1e1e2d, #2a2239, #3a2b4a);
+    border: 1px solid #8b7355;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(139, 115, 85, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ermitage-station .station-icon {
+    color: #d4af37;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    transition: all 0.4s ease;
+}
+
+.ermitage-station:hover {
+    background: linear-gradient(135deg, #252438, #342a45, #4a365b);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(139, 115, 85, 0.5);
+}
+
+.ermitage-station:hover .station-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.7));
+    animation: ermitagePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ermitagePulse {
+    0%, 100% { transform: scale(1.1); opacity: 0.9; }
+    50% { transform: scale(1.13); opacity: 1; }
+}
+
+.ermitage-station.playing {
+    animation: ermitageGlow 3s infinite alternate;
+    border-color: #d4af37;
+}
+
+@keyframes ermitageGlow {
+    0% { box-shadow: 0 0 10px rgba(139, 115, 85, 0.5), 0 0 5px rgba(212, 175, 55, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(139, 115, 85, 0.8), 0 0 15px rgba(212, 175, 55, 0.5); }
+}
+
+/* Gold leaf pattern effect */
+.ermitage-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle, transparent 95%, rgba(212, 175, 55, 0.05) 96%, transparent 97%),
+        repeating-linear-gradient(45deg, transparent 0%, rgba(212, 175, 55, 0.03) 0.5%, transparent 1%);
+    background-size: 30px 30px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Classical frame effect */
+.ermitage-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-image: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%);
+    border-image-slice: 1;
+    pointer-events: none;
+    animation: ermitageBorder 8s linear infinite;
+}
+
+@keyframes ermitageBorder {
+    0% { border-image-source: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+    25% { border-image-source: linear-gradient(to bottom left, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+    50% { border-image-source: linear-gradient(to top left, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+    75% { border-image-source: linear-gradient(to top right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+    100% { border-image-source: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    .ermitage-station {
+        background: linear-gradient(135deg, #141420, #1e1828, #2a2038);
+    }
+    .ermitage-station .station-name {
+        color: #f5f5f5;
+        text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+}
+
+/* Station name styling */
+.ermitage-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    font-style: italic;
+    color: #d4af37;
+    letter-spacing: 0.5px;
+}
+
+/* SVG icon coloring */
+.ermitage-station .station-icon svg path[fill="#ed1c24"] {
+    fill: #d4af37;
+    transition: fill 0.3s ease;
+}
+
+.ermitage-station:hover .station-icon svg path[fill="#ed1c24"] {
+    fill: #f8e08e;
+}
+
+/* Royal Radio Station Styles */
+.royalradio-station {
+    background: linear-gradient(135deg, #1a0a33, #2d0b4e, #3d1068);
+    border: 2px solid #c9a227;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.royalradio-station .station-icon {
+    color: #c9a227;
+    filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.6));
+    transition: all 0.5s ease;
+}
+
+.royalradio-station:hover {
+    background: linear-gradient(135deg, #220c40, #3a1161, #4e1785);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(201, 162, 39, 0.6);
+}
+
+.royalradio-station:hover .station-icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 15px rgba(201, 162, 39, 0.9));
+    animation: royalPulse 2s ease-in-out infinite;
+}
+
+@keyframes royalPulse {
+    0%, 100% { transform: scale(1.15); opacity: 0.95; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+.royalradio-station.playing {
+    animation: royalGlow 3s infinite alternate;
+    border-color: #f8d64e;
+}
+
+@keyframes royalGlow {
+    0% { box-shadow: 0 0 15px rgba(201, 162, 39, 0.6), 0 0 8px rgba(248, 214, 78, 0.4); }
+    100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.9), 0 0 20px rgba(248, 214, 78, 0.6); }
+}
+
+/* Royal pattern effect */
+.royalradio-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle, transparent 95%, rgba(201, 162, 39, 0.05) 96%, transparent 97%),
+        repeating-linear-gradient(45deg, transparent 0%, rgba(201, 162, 39, 0.03) 0.5%, transparent 1%);
+    background-size: 40px 40px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Crown jewel effect */
+.royalradio-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px double #c9a227;
+    border-radius: 8px;
+    pointer-events: none;
+    animation: royalShine 6s linear infinite;
+}
+
+@keyframes royalShine {
+    0% { border-color: #c9a227; opacity: 0.7; }
+    50% { border-color: #f8d64e; opacity: 1; }
+    100% { border-color: #c9a227; opacity: 0.7; }
+}
+
+/* Station name styling */
+.royalradio-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    font-weight: bold;
+    color: #f8d64e;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    font-size: 1.1em;
+}
+
+/* SVG icon coloring */
+.royalradio-station .station-icon svg path {
+    fill: #c9a227;
+    transition: fill 0.4s ease;
+}
+
+.royalradio-station:hover .station-icon svg path {
+    fill: #f8d64e;
+}
+
+/* Frequency badge effect */
+.royalradio-station .station-name::after {
+    content: "98.6FM";
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.9em;
+    color: #fff;
+    background: rgba(201, 162, 39, 0.7);
+    padding: 2px 8px;
+    border-radius: 12px;
+    vertical-align: middle;
+    transform: translateY(-2px);
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    .royalradio-station {
+        background: linear-gradient(135deg, #0f051f, #1d0835, #280b47);
+    }
+    .royalradio-station .station-name {
+        color: #f8d64e;
+        text-shadow: 0 0 8px rgba(248, 214, 78, 0.4);
+    }
+    .royalradio-station::before {
+        opacity: 0.8;
+    }
+}
+
+/* Special hover effect for frequency */
+.royalradio-station:hover .station-name::after {
+    background: rgba(248, 214, 78, 0.9);
+    transform: translateY(-2px) scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* Classical KUSC Radio Station Styles */
+.classical_kusc-station {
+    background: linear-gradient(135deg, #1e1e2e, #2a2a3a, #3a3a4a);
+    border: 1px solid #8b6b4b;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(139, 107, 75, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.classical_kusc-station .station-icon {
+    width: 80px; /* Размер можно регулировать */
+    height: 80px;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 0 8px rgba(210, 180, 140, 0.4));
+}
+
+.classical_kusc-station:hover {
+    background: linear-gradient(135deg, #282838, #363646, #464656);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(139, 107, 75, 0.5);
+}
+
+.classical_kusc-station:hover .station-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(210, 180, 140, 0.6));
+    animation: classicalPulse 2s ease-in-out infinite;
+}
+
+@keyframes classicalPulse {
+    0%, 100% { transform: scale(1.1); }
+    50% { transform: scale(1.13); }
+}
+
+.classical_kusc-station.playing {
+    animation: classicalGlow 3s infinite alternate;
+    border-color: #d2b48c;
+}
+
+@keyframes classicalGlow {
+    0% { box-shadow: 0 0 10px rgba(139, 107, 75, 0.5), 0 0 5px rgba(210, 180, 140, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(139, 107, 75, 0.8), 0 0 15px rgba(210, 180, 140, 0.5); }
+}
+
+/* Musical notes effect */
+.classical_kusc-station::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle, transparent 95%, rgba(210, 180, 140, 0.05) 96%, transparent 97%),
+        repeating-linear-gradient(45deg, transparent 0%, rgba(210, 180, 140, 0.03) 0.5%, transparent 1%);
+    background-size: 30px 30px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Classical frame effect */
+.classical_kusc-station::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(210, 180, 140, 0.3);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+/* Station name styling */
+.classical_kusc-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    color: #d2b48c;
+    letter-spacing: 0.5px;
+    font-size: 1.1em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Frequency badge effect */
+.classical_kusc-station .station-name::after {
+    content: "KUSC";
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 0.9em;
+    font-style: italic;
+    color: #fff;
+    background: rgba(139, 107, 75, 0.6);
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    .classical_kusc-station {
+        background: linear-gradient(135deg, #141420, #1e1e2e, #282838);
+    }
+    .classical_kusc-station .station-name {
+        color: #e6d5b8;
+    }
+    .classical_kusc-station::before {
+        opacity: 0.6;
+    }
+}
+
+/* Hover effect for frequency */
+.classical_kusc-station:hover .station-name::after {
+    background: rgba(210, 180, 140, 0.7);
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /* Движущиеся частицы */
