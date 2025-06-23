@@ -1513,50 +1513,50 @@
     fill: #f8e08e;
 }
 
-/* Royal Radio Station Styles */
+/* Royal Radio Station Styles - Modified */
 .royalradio-station {
     background: linear-gradient(135deg, #1a0a33, #2d0b4e, #3d1068);
-    border: 2px solid #c9a227;
+    border: 2px solid transparent; /* Убрана желтая обводка */
     border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
 }
 
 .royalradio-station .station-icon {
-    color: #c9a227;
-    filter: drop-shadow(0 0 10px rgba(201, 162, 39, 0.6));
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
     transition: all 0.5s ease;
 }
 
 .royalradio-station:hover {
     background: linear-gradient(135deg, #220c40, #3a1161, #4e1785);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(201, 162, 39, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .royalradio-station:hover .station-icon {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 15px rgba(201, 162, 39, 0.9));
-    animation: royalPulse 2s ease-in-out infinite;
-}
-
-@keyframes royalPulse {
-    0%, 100% { transform: scale(1.15); opacity: 0.95; }
-    50% { transform: scale(1.2); opacity: 1; }
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .royalradio-station.playing {
     animation: royalGlow 3s infinite alternate;
-    border-color: #f8d64e;
 }
 
 @keyframes royalGlow {
-    0% { box-shadow: 0 0 15px rgba(201, 162, 39, 0.6), 0 0 8px rgba(248, 214, 78, 0.4); }
-    100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.9), 0 0 20px rgba(248, 214, 78, 0.6); }
+    0% { box-shadow: 0 0 5px rgba(248, 214, 78, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(248, 214, 78, 0.7); }
 }
 
+/* Station name styling */
+.royalradio-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    font-weight: bold;
+    color: #ffffff; /* Белый цвет текста */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
 
 /* Dark mode adaptation */
 @media (prefers-color-scheme: dark) {
@@ -1564,19 +1564,9 @@
         background: linear-gradient(135deg, #0f051f, #1d0835, #280b47);
     }
     .royalradio-station .station-name {
-        color: #f8d64e;
-        text-shadow: 0 0 8px rgba(248, 214, 78, 0.4);
+        color: #ffffff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     }
-    .royalradio-station::before {
-        opacity: 0.8;
-    }
-}
-
-/* Special hover effect for frequency */
-.royalradio-station:hover .station-name::after {
-    background: rgba(248, 214, 78, 0.9);
-    transform: translateY(-2px) scale(1.05);
-    transition: all 0.3s ease;
 }
 
 /* Classical KUSC Radio Station Styles */
