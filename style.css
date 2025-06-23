@@ -1557,67 +1557,6 @@
     100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.9), 0 0 20px rgba(248, 214, 78, 0.6); }
 }
 
-/* Royal pattern effect */
-.royalradio-station::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle, transparent 95%, rgba(201, 162, 39, 0.05) 96%, transparent 97%),
-        repeating-linear-gradient(45deg, transparent 0%, rgba(201, 162, 39, 0.03) 0.5%, transparent 1%);
-    background-size: 40px 40px;
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-/* Crown jewel effect */
-.royalradio-station::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 3px double #c9a227;
-    border-radius: 8px;
-    pointer-events: none;
-    animation: royalShine 6s linear infinite;
-}
-
-@keyframes royalShine {
-    0% { border-color: #c9a227; opacity: 0.7; }
-    50% { border-color: #f8d64e; opacity: 1; }
-    100% { border-color: #c9a227; opacity: 0.7; }
-}
-
-
-
-/* SVG icon coloring */
-.royalradio-station .station-icon svg path {
-    fill: #c9a227;
-    transition: fill 0.4s ease;
-}
-
-.royalradio-station:hover .station-icon svg path {
-    fill: #f8d64e;
-}
-
-/* Frequency badge effect */
-.royalradio-station .station-name::after {
-    content: "98.6FM";
-    display: inline-block;
-    margin-left: 8px;
-    font-size: 0.9em;
-    color: #fff;
-    background: rgba(201, 162, 39, 0.7);
-    padding: 2px 8px;
-    border-radius: 12px;
-    vertical-align: middle;
-    transform: translateY(-2px);
-}
 
 /* Dark mode adaptation */
 @media (prefers-color-scheme: dark) {
