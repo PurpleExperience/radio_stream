@@ -1347,14 +1347,7 @@
     100% { box-shadow: 0 0 20px rgba(230, 175, 46, 0.7); }
 }
 
-/* Station name styling */
-.jazz-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    font-style: italic;
-    color: #ffffff; /* Белый цвет текста */
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+
 
 /* Vinyl record effect (сохранен) */
 .jazz-station::before {
