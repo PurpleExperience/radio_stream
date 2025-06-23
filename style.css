@@ -1501,13 +1501,7 @@
     }
 }
 
-/* Station name styling */
-.ermitage-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    font-style: italic;
-    color: #d4af37;
-    letter-spacing: 0.5px;
-}
+
 
 /* SVG icon coloring */
 .ermitage-station .station-icon svg path[fill="#ed1c24"] {
@@ -1599,15 +1593,7 @@
     100% { border-color: #c9a227; opacity: 0.7; }
 }
 
-/* Station name styling */
-.royalradio-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    font-weight: bold;
-    color: #f8d64e;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
-    font-size: 1.1em;
-}
+
 
 /* SVG icon coloring */
 .royalradio-station .station-icon svg path {
@@ -1728,14 +1714,7 @@
     pointer-events: none;
 }
 
-/* Station name styling */
-.classical_kusc-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    color: #d2b48c;
-    letter-spacing: 0.5px;
-    font-size: 1.1em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
+
 
 /* Frequency badge effect */
 .classical_kusc-station .station-name::after {
