@@ -1311,51 +1311,52 @@
 }
 
 
-/* Jazz Radio Station Styles */
+/* Jazz Radio Station Styles - Modified */
 .jazz-station {
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    border: 1px solid #8d6e63;
+    border: 1px solid transparent; /* Убрана коричневая обводка */
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(141, 110, 99, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
 .jazz-station .station-icon {
-    color: #e6af2e;
-    filter: drop-shadow(0 0 8px rgba(230, 175, 46, 0.5));
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
     transition: all 0.4s ease;
 }
 
 .jazz-station:hover {
     background: linear-gradient(135deg, #1a1a2e, #1b2a4e, #133b6e);
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(141, 110, 99, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .jazz-station:hover .station-icon {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 12px rgba(230, 175, 46, 0.7));
-    animation: jazzPulse 2s ease-in-out infinite;
-}
-
-@keyframes jazzPulse {
-    0%, 100% { transform: scale(1.1); opacity: 0.9; }
-    50% { transform: scale(1.13); opacity: 1; }
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .jazz-station.playing {
     animation: jazzGlow 3s infinite alternate;
-    border-color: #e6af2e;
 }
 
 @keyframes jazzGlow {
-    0% { box-shadow: 0 0 10px rgba(141, 110, 99, 0.5), 0 0 5px rgba(230, 175, 46, 0.3); }
-    100% { box-shadow: 0 0 20px rgba(141, 110, 99, 0.8), 0 0 15px rgba(230, 175, 46, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(230, 175, 46, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(230, 175, 46, 0.7); }
 }
 
-/* Vinyl record effect */
+/* Station name styling */
+.jazz-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    font-style: italic;
+    color: #ffffff; /* Белый цвет текста */
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Vinyl record effect (сохранен) */
 .jazz-station::before {
     content: "";
     position: absolute;
@@ -1367,11 +1368,11 @@
         radial-gradient(circle, transparent 60%, rgba(230, 175, 46, 0.1) 60.5%, transparent 61%),
         repeating-radial-gradient(circle, transparent 0%, rgba(230, 175, 46, 0.05) 0.5%, transparent 1%);
     background-size: 40px 40px;
-    opacity: 0.4;
+    opacity: 0.3; /* Слегка уменьшена прозрачность */
     pointer-events: none;
 }
 
-/* Smooth jazz wave effect */
+/* Smooth jazz wave effect (упрощен) */
 .jazz-station::after {
     content: "";
     position: absolute;
@@ -1381,17 +1382,12 @@
     bottom: 0;
     background: linear-gradient(
         to bottom,
-        transparent 90%,
-        rgba(230, 175, 46, 0.1) 90%
+        transparent 95%,
+        rgba(230, 175, 46, 0.05) 95%
     );
-    background-size: 100% 15px;
+    background-size: 100% 10px;
     pointer-events: none;
-    animation: jazzWave 12s linear infinite;
-}
-
-@keyframes jazzWave {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100%; }
+    animation: jazzWave 15s linear infinite;
 }
 
 /* Dark mode adaptation */
@@ -1401,93 +1397,53 @@
     }
     .jazz-station .station-name {
         color: #f5f5f5;
-    }
-    .jazz-station .station-genre {
-        color: #e6af2e;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     }
 }
 
-/* Ermitage Radio Station Styles */
+/* Ermitage Radio Station Styles - Modified */
 .ermitage-station {
     background: linear-gradient(135deg, #1e1e2d, #2a2239, #3a2b4a);
-    border: 1px solid #8b7355;
+    border: 1px solid transparent; /* Убрана золотая обводка */
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(139, 115, 85, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
 .ermitage-station .station-icon {
-    color: #d4af37;
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
     transition: all 0.4s ease;
 }
 
 .ermitage-station:hover {
     background: linear-gradient(135deg, #252438, #342a45, #4a365b);
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(139, 115, 85, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .ermitage-station:hover .station-icon {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.7));
-    animation: ermitagePulse 2.5s ease-in-out infinite;
-}
-
-@keyframes ermitagePulse {
-    0%, 100% { transform: scale(1.1); opacity: 0.9; }
-    50% { transform: scale(1.13); opacity: 1; }
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .ermitage-station.playing {
     animation: ermitageGlow 3s infinite alternate;
-    border-color: #d4af37;
 }
 
 @keyframes ermitageGlow {
-    0% { box-shadow: 0 0 10px rgba(139, 115, 85, 0.5), 0 0 5px rgba(212, 175, 55, 0.3); }
-    100% { box-shadow: 0 0 20px rgba(139, 115, 85, 0.8), 0 0 15px rgba(212, 175, 55, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
 }
 
-/* Gold leaf pattern effect */
-.ermitage-station::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle, transparent 95%, rgba(212, 175, 55, 0.05) 96%, transparent 97%),
-        repeating-linear-gradient(45deg, transparent 0%, rgba(212, 175, 55, 0.03) 0.5%, transparent 1%);
-    background-size: 30px 30px;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-/* Classical frame effect */
-.ermitage-station::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid transparent;
-    border-image: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%);
-    border-image-slice: 1;
-    pointer-events: none;
-    animation: ermitageBorder 8s linear infinite;
-}
-
-@keyframes ermitageBorder {
-    0% { border-image-source: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
-    25% { border-image-source: linear-gradient(to bottom left, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
-    50% { border-image-source: linear-gradient(to top left, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
-    75% { border-image-source: linear-gradient(to top right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
-    100% { border-image-source: linear-gradient(to bottom right, #8b7355 0%, #d4af37 50%, #8b7355 100%); }
+/* Station name styling */
+.ermitage-station .station-name {
+    font-family: 'Times New Roman', 'Palatino Linotype', serif;
+    font-style: italic;
+    color: #ffffff; /* Белый цвет текста */
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Dark mode adaptation */
@@ -1496,12 +1452,10 @@
         background: linear-gradient(135deg, #141420, #1e1828, #2a2038);
     }
     .ermitage-station .station-name {
-        color: #f5f5f5;
-        text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        color: #ffffff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
     }
 }
-
-
 
 /* SVG icon coloring */
 .ermitage-station .station-icon svg path[fill="#ed1c24"] {
@@ -1547,15 +1501,6 @@
 @keyframes royalGlow {
     0% { box-shadow: 0 0 5px rgba(248, 214, 78, 0.3); }
     100% { box-shadow: 0 0 20px rgba(248, 214, 78, 0.7); }
-}
-
-/* Station name styling */
-.royalradio-station .station-name {
-    font-family: 'Times New Roman', 'Palatino Linotype', serif;
-    font-weight: bold;
-    color: #ffffff; /* Белый цвет текста */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
 }
 
 /* Dark mode adaptation */
