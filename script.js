@@ -473,36 +473,6 @@ function copyToClipboard(text) {
     });
 }
 
-/**
- * Показывает детали оплаты через СБП
- */
-function payWithSBP() {
-    const paymentDetails = document.getElementById('paymentDetails');
-    const paymentTitle = document.getElementById('paymentTitle');
-    const paymentContent = document.getElementById('paymentContent');
-    
-    paymentTitle.textContent = '💸 Поддержка через СБП(Сбер)';
-    paymentContent.innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <div style="font-size: 1.5rem; margin-bottom: 15px;">
-                📞 <strong>+7 (904) 512-68-47</strong>
-                <button class="copy-button" onclick="copyToClipboard('+79045126847')">Копировать</button>
-            </div>
-            <div style="margin: 20px 0; padding: 15px; background: rgba(30, 30, 30, 0.8); border-radius: 10px; border: 1px solid #333;">
-                <strong>Как поддержать:</strong><br>
-                1. Откройте приложение вашего банка<br>
-                2. Выберите "Переводы" → "По номеру телефона"<br>
-                3. Введите номер: +7(904)512-68-47<br>
-                4. Укажите любую сумму<br>
-                5. Выберите Сбербанк<br>
-                6. В комментарии напишите мне пожелания :)
-            </div>
-        </div>
-    `;
-    
-    document.getElementById('paymentMethods').style.display = 'none';
-    paymentDetails.style.display = 'block';
-}
 
 /**
  * Показывает детали оплаты через ЮMoney
